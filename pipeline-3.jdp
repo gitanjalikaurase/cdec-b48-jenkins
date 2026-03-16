@@ -30,9 +30,11 @@ pipeline {
                 }                
             }
         }
-        stage ('DEPLOY'){
+        stage ('DELIVER'){
             steps{
-                echo 'DEPLOY SUCCESS'
+                sh '''cd backend/target
+                    aws s3 cp target/student-registration-backend-0.0.1-SNAPSHOT.jar s3://easy-crud-release/easy-crud.jar
+                    '''
             }
         }
     }
